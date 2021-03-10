@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbConnection = async() => {
+const dbConnection = async () => {
 
     try {
         await mongoose.connect( process.env.MONGODB_CNN, {
@@ -11,8 +11,6 @@ const dbConnection = async() => {
         });
 
         console.log('Base de datos online');
-
-
 
     } catch (err) {
         console.log(err);
