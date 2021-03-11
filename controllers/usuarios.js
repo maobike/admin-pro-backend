@@ -6,11 +6,27 @@ const Usuario = require('../models/usuario');
 
 const getUsuarios = async (req, res) => {
 
-    const usuario = await Usuario.find();
+    const desde = Number(req.query.desde) || 0;
+
+    // const usuarios = await Usuario.find()
+    //     .skip( desde )
+    //     .limit( 5 );
+
+    // const total = await Usuario.count();
+
+    const [ total, usuarios ] = await Promise.all([
+        Usuario.countDocuments(),
+        Usuario
+            .find({}, 'nombre email role google')
+            .skip( desde )
+            .limit( 5 )
+    ]);
 
     res.json({
         ok: true,
-        usuario
+        desde,
+        total,
+        usuarios,
     })
 
 }
