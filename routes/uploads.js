@@ -5,7 +5,7 @@
  const { Router } = require('express');
  const exFileUpload = require('express-fileupload');
 
- const { fileUpload } = require('../controllers/uploads');
+ const { fileUpload, retornarImagen } = require('../controllers/uploads');
  const { validarJWT } = require('../middlewares/validar-jwt');
  
 
@@ -21,6 +21,8 @@
  * Necesita token
  */
  router.put( '/:tipo/:id', validarJWT, fileUpload );
+ 
+ router.get( '/:tipo/:foto', validarJWT, retornarImagen );
 
  
  module.exports = router;
